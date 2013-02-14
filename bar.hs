@@ -9,10 +9,10 @@ highestHeight bars = M.foldl (\a b -> maximum [a, b] ) 0 bars
 
 -- Count for the bars
 makeBars :: String -> Bars
-makeBars raw = M.map (\x -> round $ x / divisor) bars
+makeBars raw = M.map (\x -> round $ x * 80 / divisor) bars
   where
     bars = foldr (\level -> M.insertWith (+) level 1) M.empty $ words raw
-    divisor = 3
+    divisor = maximum $ map snd $ M.toList
 
 -- Write one row.
 makeBarString :: String -> Int -> String
