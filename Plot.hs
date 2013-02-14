@@ -3,24 +3,26 @@ import qualified Data.Map as M
 import qualified Data.List as L
 
 -- Bars to be plotted
-type Bars = M.Map String Int
+type Bars k = M.Map k Int
 
-makeBars :: String -> Bars
-makeBars raw = foldr (\level -> M.insertWith (+) level 1) M.empty $ words raw
-
-makeBar :: String -> Int -> String
+-- Generic
+makeBar :: Ord k => k -> Int -> String
 makeBar key value = label ++ " " ++ bar
   where
     bar = take value $ repeat '|'
-    label = reverse $ take 5 $ reverse $ (take 5 $ repeat ' ') ++ key
+    label = reverse $ take 5 $ reverse $ (take 5 $ repeat ' ') ++ show key
 
-makeBarPlot :: Bars -> [String]
+makeBarPlot :: Ord k => Bars k -> [String]
 makeBarPlot bars = map (\l -> snd l) $ M.toList $ M.mapWithKey makeBar bars
 
-makeHistBars :: String -> Bars
+-- Specific
+makeBars :: String -> Bars String
+makeBars raw = foldr (\level -> M.insertWith (+) level 1) M.empty $ words raw
+
+makeHistBars :: String -> Bars Float
 makeHistBars raw = foldr (\level -> M.insertWith (+) level 0) bars [(minimum levels)..(maximum levels)]
   where
-    bars = foldr (\level -> M.insertWith (+) level 1) M.empty $ map (\x -> read x :: Float) words raw
+    bars = foldr (\level -> M.insertWith (+) level 1) M.empty $ map (\x -> read x :: Float) $ words raw
     levels = M.keys bars
 
 barplot :: String -> String
