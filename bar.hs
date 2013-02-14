@@ -12,7 +12,7 @@ makeBars :: String -> Bars
 makeBars raw = M.map (\x -> round $ x * 80 / divisor) bars
   where
     bars = foldr (\level -> M.insertWith (+) level 1) M.empty $ words raw
-    divisor = maximum $ map snd $ M.toList
+    divisor = maximum $ map snd $ M.toList bars
 
 -- Write one row.
 makeBarString :: String -> Int -> String
