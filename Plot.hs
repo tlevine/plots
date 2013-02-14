@@ -9,7 +9,7 @@ sepalLengthBars = Map.fromList [("4", 5), ("5", 47), ("6", 68), ("7", 24), ("8",
 
 -- Convert bars to a list of lines
 makePlotLines :: Bars -> [String]
-makePlotLines bars = reverse $ [axis]
+makePlotLines bars = [axis] ++ $ reverse $ []
   where
     highestHeight = Map.foldl max 0 bars
     axis = unwords $ Map.keys bars
