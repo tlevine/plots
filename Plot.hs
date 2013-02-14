@@ -7,22 +7,13 @@ type Bars = Map.Map String Int
 sepalLengthBars :: Bars
 sepalLengthBars = Map.fromList [("4", 5), ("5", 47), ("6", 68), ("7", 24), ("8", 6)]
 
--- Convert bars to a list of lines
-makePlotLines :: Bars -> [String]
-makePlotLines bars = reverse $ [] ++ [axis]
-  where
-    highestHeight = Map.foldl max 0 bars
-    axis = unwords $ Map.keys bars
-    makePlotLine currentHeight = unwords $ Map.foldr (\x result -> x <= currentHeight)
-    boxes = map makePlotLine [1..highestHeight]
+makeBar :: String -> Int -> String
+--makeBar key value = key ++ " " ++ take value $ repeat '='
+makeBar key value = take value $ repeat '='
 
--- Make a plot
-countPlot :: Int -> Int -> Bars -> String
-countPlot height width bars = concat $ makePlotLines bars
-
--- Default settings
-countPlotDefault = countPlot 50 80
+--makeBarPlot :: Bars -> [String]
+--makeBarPlot bars = Map.mapWithKey makeBar bars
 
 main = do
-  putStrLn $ countPlotDefault sepalLengthBars
---putStrLn $ bars
+--putStrLn $ show $ makeBarPlot sepalLengthBars
+  putStrLn $ makeBar "aoeu" 8
