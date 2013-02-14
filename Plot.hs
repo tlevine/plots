@@ -18,10 +18,10 @@ makeBarPlot :: Bars -> [String]
 makeBarPlot bars = map (\l -> snd l) $ M.toList $ M.mapWithKey makeBar bars
 
 makeHistBars :: String -> Bars
-makeHistBars raw = foldr (\level -> M.insertWith (+) (show level) 0) bars [(minimum levels)..(maximum levels)]
+makeHistBars raw = foldr (\level -> M.insertWith (+) level 0) bars [(minimum levels)..(maximum levels)]
   where
-    bars = makeBars raw
-    levels = map (\x -> read x :: Int) $ M.keys bars
+    bars = foldr (\level -> M.insertWith (+) level 1) M.empty $ map (\x -> read x :: Float) words raw
+    levels = M.keys bars
 
 barplot :: String -> String
 barplot raw = (L.intercalate "\n" $ makeBarPlot $ makeBars raw) ++ "\n"
