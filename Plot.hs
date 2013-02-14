@@ -9,9 +9,10 @@ sepalLengthBars :: Bars
 sepalLengthBars = M.fromList [("4", 5), ("5", 47), ("6", 68), ("7", 24), ("8", 6)]
 
 makeBar :: String -> Int -> String
-makeBar key value = key ++ " " ++ bar
+makeBar key value = label ++ " " ++ bar
   where
     bar = take value $ repeat '|'
+    label = reverse $ take 5 $ reverse $ (take 5 $ repeat ' ') ++ key
 
 makeBarPlot :: Bars -> [String]
 makeBarPlot bars = map (\l -> snd l) $ M.toList $ M.mapWithKey makeBar bars
