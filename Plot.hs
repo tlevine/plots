@@ -25,5 +25,17 @@ makeBar key value = label ++ " " ++ bar
 makeBarPlot :: Bars -> [String]
 makeBarPlot bars = map (\l -> snd l) $ M.toList $ M.mapWithKey makeBar bars
 
+barplot :: String -> String
+barplot raw = (L.intercalate "\n" $ makeBarPlot $ makeBars raw) ++ "\n"
+
+--makeHistBars :: String -> Bars
+--makeHistBars raw = map (\key -> M.insertWith (+) key 0) bars
+--  where
+--    bars = foldr (\level -> M.insertWith (+) level 1) M.empty $ map (\w -> read w :: Int) words raw
+
+--hist :: String -> String
+--hist raw = (L.intercalate "\n" $ makeBarPlot $ makeHistBars raw) ++ "\n"
+
+--main = interact main'
 main = do
-  putStrLn $ L.intercalate "\n" $ makeBarPlot sepalLengthBars
+  putStrLn $ barplot "8 7 3 2 3 2 3 2 8"
