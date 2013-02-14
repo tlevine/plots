@@ -1,3 +1,5 @@
 Plot
-Plot.o
-Plot.hi
+hist
+bar
+*.o
+*.hi

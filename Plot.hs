@@ -1,3 +1,4 @@
+module Plot ( hist, barplot ) where
 import qualified Data.Map as M
 import qualified Data.List as L
 
@@ -28,7 +29,6 @@ barplot raw = (L.intercalate "\n" $ makeBarPlot $ makeBars raw) ++ "\n"
 hist :: String -> String
 hist raw = (L.intercalate "\n" $ makeBarPlot $ makeHistBars raw) ++ "\n"
 
---main = interact main'
 main = do
   putStrLn $ barplot "8 7 3 2 3 2 3 2 8"
   putStrLn $ hist "8 7 3 2 3 2 3 2 8"
