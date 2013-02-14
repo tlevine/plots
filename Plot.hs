@@ -9,11 +9,12 @@ sepalLengthBars = Map.fromList [("4", 5), ("5", 47), ("6", 68), ("7", 24), ("8",
 
 -- Convert bars to a list of lines
 makePlotLines :: Bars -> [String]
-makePlotLines bars = [axis] ++ $ reverse $ []
+makePlotLines bars = reverse $ [] ++ [axis]
   where
     highestHeight = Map.foldl max 0 bars
     axis = unwords $ Map.keys bars
-    -- [1..highestHeight]
+    makePlotLine currentHeight = unwords $ Map.foldr (\x result -> x <= currentHeight)
+    boxes = map makePlotLine [1..highestHeight]
 
 -- Make a plot
 countPlot :: Int -> Int -> Bars -> String
