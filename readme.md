@@ -5,3 +5,8 @@ Plots for your shell
 Given a factor variable, plot a bar plot
 
     $ cat postures | ./bar
+    hover ||||||||||||||||||||||||||||||||||||||||
+    other ||
+      sit ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    squat |||
+    stand ||||||||||||||||||||||||||||||
